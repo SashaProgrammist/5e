@@ -10,9 +10,6 @@ size_t strlen(const char *begin) {
 }
 
 char *find(const char *begin, const char *end, const int ch) {
-    if (begin > end)
-        exit(1);
-
     while (begin != end && *begin != ch)
         begin++;
 
@@ -51,4 +48,30 @@ int strcmp_(const char *lhs, const char *rhs) {
     for (; *lhs == *rhs && *lhs != '\0'; lhs++, rhs++);
 
     return *lhs - *rhs;
+}
+
+char *copy(const char *beginSource, const char *endSource,
+           char *beginDestination) {
+    for (; beginSource != endSource; beginDestination++, beginSource++)
+        *beginDestination = *beginSource;
+
+    return beginDestination;
+}
+
+char *copyIf(char *beginSource, const char *endSource,
+             char *beginDestination, int (*f)(char *)) {
+    for (; beginSource != endSource; beginSource++)
+        if (f(beginSource))
+            *(beginDestination++) = *beginSource;
+
+    return beginDestination;
+}
+
+char *copyIfReverse(char *rbeginSource, const char *rendSource,
+                    char *beginDestination, int (*f)(char *)) {
+    for (; rbeginSource != rendSource; rbeginSource--)
+        if (f(rbeginSource))
+            *(beginDestination++) = *rbeginSource;
+
+    return beginDestination;
 }

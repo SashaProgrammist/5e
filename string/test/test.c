@@ -6,7 +6,7 @@ void test_strlen() {
     assert(strlen("42") == 2);
 }
 
-void test_find(){
+void test_find() {
     char st[] = "aaabbb";
     assert(find(st, st + 6, 'b') == st + 3);
     *find(st, st + 6, 'b') = 'a';
@@ -17,13 +17,13 @@ void test_find(){
     assert(find(st, st + 6, 'b') == st + 6);
 
     char *begin = st;
-    while (*begin != '\0'){
+    while (*begin != '\0') {
         assert(*begin == 'a');
         begin++;
     }
 }
 
-void test_findNonSpace(){
+void test_findNonSpace() {
     char st[] = " \n\t";
     assert(findNonSpace(st) == st + 3);
     findNonSpace(st)[-1] = 'a';
@@ -34,13 +34,13 @@ void test_findNonSpace(){
     assert(findNonSpace(st) == st);
 
     char *begin = st;
-    while (*begin != '\0'){
+    while (*begin != '\0') {
         assert(*begin == 'a');
         begin++;
     }
 }
 
-void test_findSpace(){
+void test_findSpace() {
     char st[] = "aa ";
     assert(findSpace(st) == st + 2);
     *findSpace(st) = '\n';
@@ -51,13 +51,13 @@ void test_findSpace(){
     assert(findSpace(st) == st + 3);
 
     char *begin = st;
-    while (*begin != '\0'){
+    while (*begin != '\0') {
         assert(*begin == 'a');
         begin++;
     }
 }
 
-void test_findNonSpaceReverse(){
+void test_findNonSpaceReverse() {
     char st[] = "aaa \n\t";
     assert(findNonSpaceReverse(st + 5, st - 1) == st + 2);
     findNonSpaceReverse(st + 5, st - 1)[1] = 'a'; // "aaaa\n\t"
@@ -68,7 +68,7 @@ void test_findNonSpaceReverse(){
     assert(findNonSpaceReverse(st + 5, st - 1) == st + 5);
 
     char *begin = st;
-    while (*begin != '\0'){
+    while (*begin != '\0') {
         assert(*begin == 'a');
         begin++;
     }
@@ -85,13 +85,13 @@ void test_findSpaceReverse() {
     assert(findSpaceReverse(st + 5, st - 1) == st - 1);
 
     char *begin = st;
-    while (*begin != '\0'){
+    while (*begin != '\0') {
         assert(*begin == 'a');
         begin++;
     }
 }
 
-void test_allFind(){
+void test_allFind() {
     test_strlen();
     test_find();
     test_findNonSpace();
@@ -100,12 +100,12 @@ void test_allFind(){
     test_findSpaceReverse();
 }
 
-void test_strcmp(){
+void test_strcmp() {
     char st1[] = "11";  //    1   2    3    4
     char st2[] = "21";  // 1  0  -1  -'1' -'3'
     char st3[] = "111"; // 2  1   0    1    1
     char st4[] = "113"; // 3 '1' -1    0   -2
-                        // 4 '3' -1    2    0
+    //                     4 '3' -1    2    0
 
     assert(strcmp_(st1, st1) == 0);
     assert(strcmp_(st1, st2) == -1);
@@ -128,7 +128,62 @@ void test_strcmp(){
     assert(strcmp_(st4, st4) == 0);
 }
 
+void test_copy() {
+    char stSource[] = "1234567890";
+    char stDestination[11];
+
+    char *result = copy(stSource,
+                        stSource + 11,
+                        stDestination);
+    assert(result == stDestination + 11);
+
+    for (int i = 0; i < 11; ++i)
+        assert(stSource[i] == stDestination[i]);
+}
+
+int deleteMultiSpace(char *ch) {
+    if (!isspace(*ch)) return 1;
+    return !isspace(ch[1]);
+}
+
+void test_copyIf() {
+    char stSource[] = "1    2     3   42  6";
+    char stResult[] = "1 2 3 42 6";
+    char stDestination[11];
+
+    char *result = copyIf(stSource,
+                          stSource + 21,
+                          stDestination,
+                          deleteMultiSpace);
+    assert(result == stDestination + 11);
+
+    for (int i = 0; i < 11; ++i)
+        assert(stResult[i] == stDestination[i]);
+}
+
+void test_copyIfReverse() {
+    char stSource[] = "1    2     3   24  6";
+    char stResult[] = "6 42 3 2 1";
+    char stDestination[21];
+
+    char *result = copyIfReverse(stSource + 19,
+                                 stSource - 1,
+                                 stDestination,
+                                 deleteMultiSpace);
+    assert(result == stDestination + 10);
+
+    for (int i = 0; i < 10; ++i)
+        assert(stResult[i] == stDestination[i]);
+}
+
+void test_allCopy() {
+    test_copy();
+    test_copyIf();
+    test_copyIfReverse();
+}
+
 void test() {
     test_allFind();
     test_strcmp();
+    test_allCopy();
 }

@@ -22,4 +22,15 @@ char *findSpaceReverse(char *rbegin, const char *rend);
 
 int strcmp_(const char *lhs, const char *rhs);
 
+// copy
+
+char *copy(const char *beginSource, const char *endSource,
+           char *beginDestination);
+
+char *copyIf(char *beginSource, const char *endSource,
+             char *beginDestination, int (*f)(char *));
+
+char* copyIfReverse(char *rbeginSource, const char *rendSource,
+                    char *beginDestination, int (*f)(char *));
+
 #endif //INC_5_STRING__H
