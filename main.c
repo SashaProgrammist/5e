@@ -1,6 +1,7 @@
-#include <stdio.h>
+#include "string/test/test.h"
 
 int main() {
-    printf("Hello, World!\n");
+    test();
+
     return 0;
 }
