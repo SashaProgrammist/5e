@@ -100,6 +100,35 @@ void test_allFind(){
     test_findSpaceReverse();
 }
 
+void test_strcmp(){
+    char st1[] = "11";  //    1   2    3    4
+    char st2[] = "21";  // 1  0  -1  -'1' -'3'
+    char st3[] = "111"; // 2  1   0    1    1
+    char st4[] = "113"; // 3 '1' -1    0   -2
+                        // 4 '3' -1    2    0
+
+    assert(strcmp_(st1, st1) == 0);
+    assert(strcmp_(st1, st2) == -1);
+    assert(strcmp_(st1, st3) == -'1');
+    assert(strcmp_(st1, st4) == -'3');
+
+    assert(strcmp_(st2, st1) == 1);
+    assert(strcmp_(st2, st2) == 0);
+    assert(strcmp_(st2, st3) == 1);
+    assert(strcmp_(st2, st4) == 1);
+
+    assert(strcmp_(st3, st1) == '1');
+    assert(strcmp_(st3, st2) == -1);
+    assert(strcmp_(st3, st3) == 0);
+    assert(strcmp_(st3, st4) == -2);
+
+    assert(strcmp_(st4, st1) == '3');
+    assert(strcmp_(st4, st2) == -1);
+    assert(strcmp_(st4, st3) == 2);
+    assert(strcmp_(st4, st4) == 0);
+}
+
 void test() {
     test_allFind();
+    test_strcmp();
 }
