@@ -215,10 +215,9 @@ void test_allCopy() {
     test_copyIfReverse();
 }
 
-void test_removeNonLetters();
-
 void test_tasks(){
     test_removeNonLetters();
+    test_AdjacentEqualLetters();
 }
 
 void test() {

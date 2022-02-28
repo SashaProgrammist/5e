@@ -17,4 +17,10 @@ void assertString(const char *expected, char *got,
 
 int *getLincExitCode();
 
+// tasks
+
+void test_removeNonLetters();
+
+void test_AdjacentEqualLetters();
+
 #endif //PROJECT_TEST_H
