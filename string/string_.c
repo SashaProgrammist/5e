@@ -45,7 +45,7 @@ char *findSpaceReverse(char *rbegin, const char *rend) {
 }
 
 int strcmp_(const char *lhs, const char *rhs) {
-    for (; *lhs == *rhs && *lhs != '\0'; lhs++, rhs++);
+    for (; *lhs != '\0' && *lhs == *rhs; lhs++, rhs++);
 
     return *lhs - *rhs;
 }
@@ -58,10 +58,19 @@ char *copy(const char *beginSource, const char *endSource,
     return beginDestination;
 }
 
-char *copyIf(char *beginSource, const char *endSource,
-             char *beginDestination, int (*f)(char *)) {
+char *copyIfExtended(char *beginSource, const char *endSource,
+                     char *beginDestination, int (*f)(char *)) {
     for (; beginSource != endSource; beginSource++)
         if (f(beginSource))
+            *(beginDestination++) = *beginSource;
+
+    return beginDestination;
+}
+
+char *copyIf(char *beginSource, const char *endSource,
+             char *beginDestination, int (*f)(int)) {
+    for (; beginSource != endSource; beginSource++)
+        if (f(*beginSource))
             *(beginDestination++) = *beginSource;
 
     return beginDestination;
@@ -74,4 +83,8 @@ char *copyIfReverse(char *rbeginSource, const char *rendSource,
             *(beginDestination++) = *rbeginSource;
 
     return beginDestination;
+}
+
+char *getEndOfString(char *s) {
+    return s + strlen(s);
 }

@@ -1,5 +1,19 @@
 #include "test.h"
 
+void assertString(const char *expected, char *got,
+                  char const *fileName, char const *funcName,
+                  int line) {
+    if (strcmp_(expected, got) == 0)
+        fprintf(stderr, "%s - OK\n", funcName);
+    else {
+        fprintf(stderr, " File %s\n", fileName);
+        fprintf(stderr, "%s - failed on line %d\n", funcName, line);
+        fprintf(stderr, " Expected : \"%s \"\n", expected);
+        fprintf(stderr, "Got: \"%s\"\n\n", got);
+        (*getLincExitCode())++;
+    }
+}
+
 void test_strlen() {
     assert(strlen("") == 0);
     assert(strlen("0") == 1);
@@ -141,20 +155,38 @@ void test_copy() {
         assert(stSource[i] == stDestination[i]);
 }
 
+int isNotEven(int ch) {
+    return ch % 2;
+}
+
+void test_copyTf() {
+    char stSource[] = "abcdefg12";
+    char stResult[] = "aceg1";
+    char stDestination[8];
+
+    char *result = copyIf(stSource,
+                          stSource + 9,
+                          stDestination,
+                          isNotEven);
+    *result = '\0';
+
+    ASSERT_STRING(stResult, stDestination);
+}
+
 int deleteMultiSpace(char *ch) {
     if (!isspace(*ch)) return 1;
     return !isspace(ch[1]);
 }
 
-void test_copyIf() {
+void test_copyIfExtended() {
     char stSource[] = "1    2     3   42  6";
     char stResult[] = "1 2 3 42 6";
     char stDestination[11];
 
-    char *result = copyIf(stSource,
-                          stSource + 21,
-                          stDestination,
-                          deleteMultiSpace);
+    char *result = copyIfExtended(stSource,
+                                  stSource + 21,
+                                  stDestination,
+                                  deleteMultiSpace);
     assert(result == stDestination + 11);
 
     for (int i = 0; i < 11; ++i)
@@ -178,12 +210,25 @@ void test_copyIfReverse() {
 
 void test_allCopy() {
     test_copy();
-    test_copyIf();
+    test_copyTf();
+    test_copyIfExtended();
     test_copyIfReverse();
+}
+
+void test_removeNonLetters();
+
+void test_tasks(){
+    test_removeNonLetters();
 }
 
 void test() {
     test_allFind();
     test_strcmp();
     test_allCopy();
+    test_tasks();
+}
+
+int *getLincExitCode() {
+    static int exitCode = 0;
+    return &exitCode;
 }
