@@ -13,7 +13,7 @@ add_library(str string/string_.h string/string_.c
         string/tasks/removeNonLetters.c
         string/tasks/removeAdjacentEqualLetters.c
         string/tasks/forWordInString.c
-        string/tasks/digitForSpaces.c)
+        string/tasks/digitForSpaces.c string/tasks/replace.c)
 
 # описываем, что для запуска project потребуется сборка tasks
 target_link_libraries(project str)

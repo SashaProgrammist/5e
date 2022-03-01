@@ -27,4 +27,6 @@ void test_forWordInString();
 
 void test_digitForSpaces();
 
+void test_replace();
+
 #endif //PROJECT_TEST_H

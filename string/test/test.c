@@ -6,9 +6,9 @@ void assertString(const char *expected, char *got,
     if (strcmp_(expected, got) == 0)
         fprintf(stderr, "%s - OK\n", funcName);
     else {
-        fprintf(stderr, " File %s\n", fileName);
+        fprintf(stderr, "File %s\n", fileName);
         fprintf(stderr, "%s - failed on line %d\n", funcName, line);
-        fprintf(stderr, " Expected : \"%s \"\n", expected);
+        fprintf(stderr, "Expected: \"%s\"\n", expected);
         fprintf(stderr, "Got: \"%s\"\n\n", got);
         (*getLincExitCode())++;
     }
@@ -259,6 +259,7 @@ void test() {
     test_allCopy();
     test_transform();
     test_tasks();
+    test_replace();
 }
 
 int *getLincExitCode() {
