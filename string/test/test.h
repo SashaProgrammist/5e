@@ -23,4 +23,6 @@ void test_removeNonLetters();
 
 void test_AdjacentEqualLetters();
 
+void test_forWordInString();
+
 #endif //PROJECT_TEST_H

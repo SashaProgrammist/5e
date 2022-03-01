@@ -155,6 +155,15 @@ void test_copy() {
         assert(stSource[i] == stDestination[i]);
 }
 
+void test_copyReverse() {
+    char s[] = "123456789";
+    char *end = copyReverse(getEndOfString(s) - 1,
+                            s - 1,
+                            getStringBuffer());
+    *end = '\0';
+    ASSERT_STRING ("987654321", getStringBuffer());
+}
+
 int isNotEven(int ch) {
     return ch % 2;
 }
@@ -194,14 +203,24 @@ void test_copyIfExtended() {
 }
 
 void test_copyIfReverse() {
+    char s[] = " Hi123 111 3 51     0      ";
+    char *end = copyIfReverse(getEndOfString(s) - 1,
+                              s - 1,
+                              getStringBuffer(),
+                              isdigit);
+    *end = '\0';
+    ASSERT_STRING ("0153111321", getStringBuffer());
+}
+
+void test_copyIfReverseExtended() {
     char stSource[] = "1    2     3   24  6";
     char stResult[] = "6 42 3 2 1";
     char stDestination[21];
 
-    char *result = copyIfReverse(stSource + 19,
-                                 stSource - 1,
-                                 stDestination,
-                                 deleteMultiSpace);
+    char *result = copyIfReverseExtended(stSource + 19,
+                                         stSource - 1,
+                                         stDestination,
+                                         deleteMultiSpace);
     assert(result == stDestination + 10);
 
     for (int i = 0; i < 10; ++i)
@@ -210,20 +229,34 @@ void test_copyIfReverse() {
 
 void test_allCopy() {
     test_copy();
+    test_copyReverse();
     test_copyTf();
     test_copyIfExtended();
     test_copyIfReverse();
+    test_copyIfReverseExtended();
 }
 
-void test_tasks(){
+void test_reverseOrder() {
+    char s[] = "GU56743JwfjM  \n";
+    reverseOrder(s, getEndOfString(s));
+    ASSERT_STRING ("\n  MjfwJ34765UG", s);
+}
+
+void test_transform(){
+    test_reverseOrder();
+}
+
+void test_tasks() {
     test_removeNonLetters();
     test_AdjacentEqualLetters();
+    test_forWordInString();
 }
 
 void test() {
     test_allFind();
     test_strcmp();
     test_allCopy();
+    test_transform();
     test_tasks();
 }
 

@@ -1,5 +1,12 @@
 #include "string_.h"
 
+char stringBuffer[MAX_STRING_SIZE + 1];
+
+//char *_stringBuffer = __stringBuffer;
+char *getStringBuffer() {
+    return stringBuffer;
+}
+
 size_t strlen(const char *begin) {
     const char *end = begin;
 
@@ -58,6 +65,13 @@ char *copy(const char *beginSource, const char *endSource,
     return beginDestination;
 }
 
+char *copyReverse(char *rbeginSource, const char *rendSource, char *beginDestination) {
+    for (; rbeginSource != rendSource; rbeginSource--)
+        *(beginDestination++) = *rbeginSource;
+
+    return beginDestination;
+}
+
 char *copyIfExtended(char *beginSource, const char *endSource,
                      char *beginDestination, int (*f)(char *)) {
     for (; beginSource != endSource; beginSource++)
@@ -77,7 +91,16 @@ char *copyIf(char *beginSource, const char *endSource,
 }
 
 char *copyIfReverse(char *rbeginSource, const char *rendSource,
-                    char *beginDestination, int (*f)(char *)) {
+                    char *beginDestination, int (*f)(int)) {
+    for (; rbeginSource != rendSource; rbeginSource--)
+        if (f(*rbeginSource))
+            *(beginDestination++) = *rbeginSource;
+
+    return beginDestination;
+}
+
+char *copyIfReverseExtended(char *rbeginSource, const char *rendSource,
+                            char *beginDestination, int (*f)(char *)) {
     for (; rbeginSource != rendSource; rbeginSource--)
         if (f(rbeginSource))
             *(beginDestination++) = *rbeginSource;
@@ -88,3 +111,36 @@ char *copyIfReverse(char *rbeginSource, const char *rendSource,
 char *getEndOfString(char *s) {
     return s + strlen(s);
 }
+
+int getWord(char *beginSearch, WordDescriptor *word) {
+    word->begin = findNonSpace(beginSearch);
+    if (*word->begin == '\0')
+        return 0;
+
+    word->end = findSpace(word->begin);
+
+    return 1;
+}
+
+int getWordReverse(char *rbegin, char *rend, WordDescriptor *word) {
+    char *endWord = findNonSpaceReverse(rbegin, rend);
+    word->end = endWord + 1;
+    if (*endWord == '\0')
+        return 0;
+
+    word->begin = findSpaceReverse(endWord, rend) + 1;
+
+    return 1;
+}
+
+void reverseOrder(char *beginSource, char *endSource) {
+    char *endBuffer = copyReverse(endSource - 1,
+                                  beginSource - 1,
+                                  getStringBuffer());
+    copy(getStringBuffer(),
+         endBuffer,
+         beginSource);
+}
+
+
+
