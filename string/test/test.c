@@ -250,6 +250,7 @@ void test_tasks() {
     test_removeNonLetters();
     test_AdjacentEqualLetters();
     test_forWordInString();
+    test_digitForSpaces();
 }
 
 void test() {

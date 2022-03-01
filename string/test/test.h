@@ -25,4 +25,6 @@ void test_AdjacentEqualLetters();
 
 void test_forWordInString();
 
+void test_digitForSpaces();
+
 #endif //PROJECT_TEST_H
