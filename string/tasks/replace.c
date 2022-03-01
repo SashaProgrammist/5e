@@ -11,10 +11,9 @@ void replace(char *source, char *w1, char *w2) {
         readPtr = source;
         recPtr = source;
     } else {
-        char *endBuf = copy(source,
-                            getEndOfString(source),
-                            getStringBuffer());
-        *endBuf = '\0';
+        copy(source,
+             getEndOfString(source) + 1,
+             getStringBuffer());
         readPtr = getStringBuffer();
         recPtr = source;
     }

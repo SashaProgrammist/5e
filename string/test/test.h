@@ -29,4 +29,6 @@ void test_digitForSpaces();
 
 void test_replace();
 
+void test_isOrderedString();
+
 #endif //PROJECT_TEST_H

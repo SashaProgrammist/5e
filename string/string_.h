@@ -19,6 +19,11 @@ int getWord(char *beginSearch, WordDescriptor *word);
 
 int getWordReverse(char *rbegin, char *rend, WordDescriptor *word);
 
+int getWordLen(WordDescriptor word);
+
+int areWordsEqual(WordDescriptor w1,
+                  WordDescriptor w2);
+
 size_t strlen(const char *begin);
 
 // find

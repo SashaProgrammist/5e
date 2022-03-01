@@ -114,10 +114,10 @@ char *getEndOfString(char *s) {
 
 int getWord(char *beginSearch, WordDescriptor *word) {
     word->begin = findNonSpace(beginSearch);
+    word->end = findSpace(word->begin);
+
     if (*word->begin == '\0')
         return 0;
-
-    word->end = findSpace(word->begin);
 
     return 1;
 }
@@ -142,5 +142,34 @@ void reverseOrder(char *beginSource, char *endSource) {
          beginSource);
 }
 
+int getWordLen(WordDescriptor word) {
+    return (int) (word.end - word.begin);
+}
 
+int areWordsEqual(WordDescriptor w1,
+                  WordDescriptor w2) {
+//    if (getWordLen(w1) != getWordLen(w2))
+//        return 0;
+//
+//    for (; getWordLen(w1) != 0 &&
+//           *w1.begin == *w2.begin;
+//           w1.begin++, w2.begin++);
+//
+//    return getWordLen(w1) == 0;
 
+    for (; getWordLen(w1) != 0 &&
+           getWordLen(w2) != 0 &&
+           *w1.begin == *w2.begin;
+           w1.begin++, w2.begin++);
+
+    switch ((getWordLen(w1) == 0) + 2 * (getWordLen(w2) == 0)) {
+        case 0:
+            return *w1.begin - *w2.begin;
+        case 1:
+            return -*w2.begin;
+        case 2:
+            return *w1.begin;
+        default: // 3
+            return 0;
+    }
+}

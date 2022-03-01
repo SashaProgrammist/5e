@@ -242,7 +242,7 @@ void test_reverseOrder() {
     ASSERT_STRING ("\n  MjfwJ34765UG", s);
 }
 
-void test_transform(){
+void test_transform() {
     test_reverseOrder();
 }
 
@@ -251,6 +251,61 @@ void test_tasks() {
     test_AdjacentEqualLetters();
     test_forWordInString();
     test_digitForSpaces();
+    test_replace();
+    test_isOrderedString();
+}
+
+void test_areWordsEqual() { // TODO
+    char sours[] = "123456789";
+
+    assert(0 == areWordsEqual(
+            (WordDescriptor) {
+                    sours, sours + 9
+            },
+            (WordDescriptor) {
+                    sours, sours + 9
+            }
+    ));
+
+    assert(1 == areWordsEqual(
+            (WordDescriptor) {
+                    sours + 1, sours + 9
+            },
+            (WordDescriptor) {
+                    sours, sours + 9
+            }
+    ));
+
+    assert(-1 == areWordsEqual(
+            (WordDescriptor) {
+                    sours, sours + 9
+            },
+            (WordDescriptor) {
+                    sours + 1, sours + 9
+            }
+    ));
+
+    assert(-'6' == areWordsEqual(
+            (WordDescriptor) {
+                    sours, sours + 5
+            },
+            (WordDescriptor) {
+                    sours, sours + 9
+            }
+    ));
+
+    assert('6' == areWordsEqual(
+            (WordDescriptor) {
+                    sours, sours + 6
+            },
+            (WordDescriptor) {
+                    sours, sours + 5
+            }
+    ));
+}
+
+void test_word() {
+    test_areWordsEqual();
 }
 
 void test() {
@@ -259,7 +314,7 @@ void test() {
     test_allCopy();
     test_transform();
     test_tasks();
-    test_replace();
+    test_word();
 }
 
 int *getLincExitCode() {
