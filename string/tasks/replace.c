@@ -27,10 +27,11 @@ void replace(char *source, char *w1, char *w2) {
             readPtr = endSource = findNonSpace(readPtr);
         } else {
             char *endWord = findSpace(readPtr);
-            char currentChar = *endWord;
-            *endWord = '\0';
+            WordDescriptor currentWord = (WordDescriptor){
+                readPtr, endWord
+            };
 
-            if (strcmp_(readPtr, word1.begin)) {
+            if (areWordsEqual(currentWord, word1)) {
                 beginSource = readPtr;
                 endSource = endWord;
             } else {
@@ -39,7 +40,6 @@ void replace(char *source, char *w1, char *w2) {
             }
 
             readPtr = endWord;
-            *endWord = currentChar;
         }
 
         recPtr = copy(beginSource,

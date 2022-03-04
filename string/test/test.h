@@ -31,4 +31,6 @@ void test_replace();
 
 void test_isOrderedString();
 
+void test_outputWordForReversOrdered();
+
 #endif //PROJECT_TEST_H

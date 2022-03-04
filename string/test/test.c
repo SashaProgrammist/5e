@@ -259,53 +259,77 @@ void test_areWordsEqual() { // TODO
     char sours[] = "123456789";
 
     assert(0 == areWordsEqual(
-            (WordDescriptor) {
-                    sours, sours + 9
-            },
-            (WordDescriptor) {
-                    sours, sours + 9
-            }
+            (WordDescriptor) {sours, sours + 9},
+            (WordDescriptor) {sours, sours + 9}
     ));
 
     assert(1 == areWordsEqual(
-            (WordDescriptor) {
-                    sours + 1, sours + 9
-            },
-            (WordDescriptor) {
-                    sours, sours + 9
-            }
+            (WordDescriptor) {sours + 1, sours + 9},
+            (WordDescriptor) {sours, sours + 9}
     ));
 
     assert(-1 == areWordsEqual(
-            (WordDescriptor) {
-                    sours, sours + 9
-            },
-            (WordDescriptor) {
-                    sours + 1, sours + 9
-            }
+            (WordDescriptor) {sours, sours + 9},
+            (WordDescriptor) {sours + 1, sours + 9}
     ));
 
     assert(-'6' == areWordsEqual(
-            (WordDescriptor) {
-                    sours, sours + 5
-            },
-            (WordDescriptor) {
-                    sours, sours + 9
-            }
+            (WordDescriptor) {sours, sours + 5},
+            (WordDescriptor) {sours, sours + 9}
     ));
 
     assert('6' == areWordsEqual(
-            (WordDescriptor) {
-                    sours, sours + 6
-            },
-            (WordDescriptor) {
-                    sours, sours + 5
-            }
+            (WordDescriptor) {sours, sours + 6},
+            (WordDescriptor) {sours, sours + 5}
     ));
 }
 
-void test_word() {
+void test_getBagOfWords() {
+    //              0123456789
+    char sours[] = " a  r aa a"  // 00
+                   "agg     12"; // 10
+
+    getBagOfWords(getBagOfWordsBuffer(), sours);
+
+    assert(getBagOfWordsBuffer()->size == 5);
+
+    WordDescriptor *word = getBagOfWordsBuffer()->words;
+    assert(word->begin == sours + 1 &&
+           word->end == sours + 2);
+    word++;
+    assert(word->begin == sours + 4 &&
+           word->end == sours + 5);
+    word++;
+    assert(word->begin == sours + 6 &&
+           word->end == sours + 8);
+    word++;
+    assert(word->begin == sours + 9 &&
+           word->end == sours + 13);
+    word++;
+    assert(word->begin == sours + 18 &&
+           word->end == sours + 20);
+}
+
+void test_getEndWord() {
+    BagOfWords *bag = getBagOfWordsBuffer();
+    for (int i = 0; i < MAX_N_WORDS_IN_STRING / 10; ++i) {
+        bag->size = i;
+        assert(getEndWord(bag) == bag->words + i - 1);
+    }
+
+    //              0123456789
+    char sours[] = " a  r aa a"  // 00
+                   "agg     12"; // 10
+    getBagOfWords(bag, sours);
+
+    ASSERT_STRING(sours + 18,
+                  getEndWord(bag)->begin);
+}
+
+void test_word_WordDescriptor() {
     test_areWordsEqual();
+    test_getBagOfWords();
+    test_getEndWord();
 }
 
 void test() {
@@ -314,7 +338,7 @@ void test() {
     test_allCopy();
     test_transform();
     test_tasks();
-    test_word();
+    test_word_WordDescriptor();
 }
 
 int *getLincExitCode() {

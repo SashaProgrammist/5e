@@ -3,26 +3,28 @@
 
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdio.h>
 
 #define MAX_STRING_SIZE 100
 #define MAX_N_WORDS_IN_STRING 100
 #define MAX_WORD_SIZE 20
 
-char *getStringBuffer();
-
 typedef struct WordDescriptor {
     char *begin; // позиция начала слова
     char *end; //   позиция первого символа, после последнего символа слова
 } WordDescriptor;
+char *getStringBuffer();
 
-int getWord(char *beginSearch, WordDescriptor *word);
-
-int getWordReverse(char *rbegin, char *rend, WordDescriptor *word);
-
-int getWordLen(WordDescriptor word);
+typedef struct BagOfWords {
+    WordDescriptor words[MAX_N_WORDS_IN_STRING];
+    size_t size;
+} BagOfWords;
+BagOfWords *getBagOfWordsBuffer();
 
 int areWordsEqual(WordDescriptor w1,
                   WordDescriptor w2);
+
+void outputWord(WordDescriptor word);
 
 size_t strlen(const char *begin);
 
@@ -65,6 +67,16 @@ char *copyIfReverseExtended(char *rbeginSource, const char *rendSource,
 // get
 
 char *getEndOfString(char *s);
+
+int getWord(char *beginSearch, WordDescriptor *word);
+
+int getWordReverse(char *rbegin, char *rend, WordDescriptor *word);
+
+int getWordLen(WordDescriptor word);
+
+void getBagOfWords(BagOfWords *bag, char *beginString);
+
+WordDescriptor *getEndWord(BagOfWords *bag);
 
 // transform
 

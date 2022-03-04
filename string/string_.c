@@ -2,6 +2,8 @@
 
 char stringBuffer[MAX_STRING_SIZE + 1];
 
+BagOfWords bagOfWordsBuffer;
+
 //char *_stringBuffer = __stringBuffer;
 char *getStringBuffer() {
     return stringBuffer;
@@ -148,15 +150,6 @@ int getWordLen(WordDescriptor word) {
 
 int areWordsEqual(WordDescriptor w1,
                   WordDescriptor w2) {
-//    if (getWordLen(w1) != getWordLen(w2))
-//        return 0;
-//
-//    for (; getWordLen(w1) != 0 &&
-//           *w1.begin == *w2.begin;
-//           w1.begin++, w2.begin++);
-//
-//    return getWordLen(w1) == 0;
-
     for (; getWordLen(w1) != 0 &&
            getWordLen(w2) != 0 &&
            *w1.begin == *w2.begin;
@@ -172,4 +165,30 @@ int areWordsEqual(WordDescriptor w1,
         default: // 3
             return 0;
     }
+}
+
+void getBagOfWords(BagOfWords *bag, char *beginString) {
+    char *beginSearch = beginString;
+    WordDescriptor word;
+    WordDescriptor *wordInBag = bag->words;
+    bag->size = 0;
+
+    while (getWord(beginSearch, &word)) {
+        *(wordInBag++) = word;
+        beginSearch = word.end;
+        bag->size++;
+    }
+}
+
+WordDescriptor *getEndWord(BagOfWords *bag) {
+    return bag->words + bag->size - 1;
+}
+
+BagOfWords *getBagOfWordsBuffer() {
+    return &bagOfWordsBuffer;
+}
+
+void outputWord(WordDescriptor word) {
+    for (; word.begin < word.end; word.begin++)
+        printf("%c", *word.begin);
 }
