@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #define MAX_STRING_SIZE 100
 #define MAX_N_WORDS_IN_STRING 100

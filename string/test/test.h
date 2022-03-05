@@ -33,4 +33,6 @@ void test_isOrderedString();
 
 void test_outputWordForReversOrdered();
 
+void test_getCountPalindromes();
+
 #endif //PROJECT_TEST_H

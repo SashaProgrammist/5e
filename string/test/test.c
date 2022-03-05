@@ -253,6 +253,7 @@ void test_tasks() {
     test_digitForSpaces();
     test_replace();
     test_isOrderedString();
+    test_getCountPalindromes();
 }
 
 void test_areWordsEqual() { // TODO
