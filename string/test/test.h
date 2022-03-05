@@ -35,4 +35,6 @@ void test_outputWordForReversOrdered();
 
 void test_getCountPalindromes();
 
+void test_mergeStrings();
+
 #endif //PROJECT_TEST_H
