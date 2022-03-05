@@ -1,6 +1,6 @@
 #include "../test/test.h"
 
-bool isPalindrome(WordDescriptor word) {
+bool isPalindrome(Word word) {
     word.end--;
 
     while (word.begin < word.end) {
@@ -16,7 +16,7 @@ bool isPalindrome(WordDescriptor word) {
 
 size_t getCountPalindromes(char *beginString) {
     size_t result = 0;
-    WordDescriptor word =
+    Word word =
             {beginString, beginString};
     bool endOfCheck = *word.end == '\0';
 
@@ -46,7 +46,7 @@ void test_isPalindrome_null() {
     for (int i = 0; i < 7; ++i)
         assert(true ==
                isPalindrome(
-                       (WordDescriptor) {s + i, s + i}
+                       (Word) {s + i, s + i}
                ));
 }
 
@@ -56,7 +56,7 @@ void test_isPalindrome_oneChar() {
     for (int i = 0; i < 6; ++i)
         assert(true ==
                isPalindrome(
-                       (WordDescriptor) {s + i, s + i + 1}
+                       (Word) {s + i, s + i + 1}
                ));
 }
 
@@ -65,25 +65,25 @@ void test_isPalindrome_twyChar() {
 
     assert(true == (
             isPalindrome(
-                    (WordDescriptor) {s + 2, s + 4}
+                    (Word) {s + 2, s + 4}
             ) &&
             isPalindrome(
-                    (WordDescriptor) {s + 4, s + 6}
+                    (Word) {s + 4, s + 6}
             ) &&
             isPalindrome(
-                    (WordDescriptor) {s + 5, s + 7}
+                    (Word) {s + 5, s + 7}
             )
     ));
 
     assert(false == (
             isPalindrome(
-                    (WordDescriptor) {s + 1, s + 3}
+                    (Word) {s + 1, s + 3}
             ) ||
             isPalindrome(
-                    (WordDescriptor) {s, s + 2}
+                    (Word) {s, s + 2}
             ) ||
             isPalindrome(
-                    (WordDescriptor) {s + 3, s + 5}
+                    (Word) {s + 3, s + 5}
             )
     ));
 }
@@ -93,19 +93,19 @@ void test_isPalindrome_threeChar() {
 
     assert(true == (
             isPalindrome(
-                    (WordDescriptor) {s, s + 3}
+                    (Word) {s, s + 3}
             ) &&
             isPalindrome(
-                    (WordDescriptor) {s + 4, s + 7}
+                    (Word) {s + 4, s + 7}
             )
     ));
 
     assert(false == (
             isPalindrome(
-                    (WordDescriptor) {s + 1, s + 4}
+                    (Word) {s + 1, s + 4}
             ) ||
             isPalindrome(
-                    (WordDescriptor) {s + 2, s + 5}
+                    (Word) {s + 2, s + 5}
             )
     ));
 }

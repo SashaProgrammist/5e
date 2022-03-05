@@ -11,24 +11,26 @@
 #define MAX_WORD_SIZE 20
 #define COPY(des, word) des = copy(word.begin, word.end, des)
 
-typedef struct WordDescriptor {
+typedef struct Word {
     char *begin; // позиция начала слова
     char *end; //   позиция первого символа, после последнего символа слова
-} WordDescriptor;
+} Word;
 char *getStringBuffer();
 
 typedef struct BagOfWords {
-    WordDescriptor words[MAX_N_WORDS_IN_STRING];
+    Word words[MAX_N_WORDS_IN_STRING];
     size_t size;
 } BagOfWords;
 BagOfWords *getBagOfWordsBuffer();
 
-int areWordsEqual(WordDescriptor w1,
-                  WordDescriptor w2);
+int areWordsEqual(Word w1,
+                  Word w2);
 
-void outputWord(WordDescriptor word);
+void outputWord(Word word);
 
 size_t strlen(const char *begin);
+
+bool isLetterInWord(char letter, Word word);
 
 // find
 
@@ -70,15 +72,17 @@ char *copyIfReverseExtended(char *rbeginSource, const char *rendSource,
 
 char *getEndOfString(char *s);
 
-int getWord(char *beginSearch, WordDescriptor *word);
+int getWord(char *beginSearch, Word *word);
 
-int getWordReverse(char *rbegin, char *rend, WordDescriptor *word);
+int getWordReverse(char *rbegin, char *rend, Word *word);
 
-int getWordLen(WordDescriptor word);
+int getWordLen(Word word);
 
 void getBagOfWords(BagOfWords *bag, char *beginString);
 
-WordDescriptor *getEndWord(BagOfWords *bag);
+Word *getEndWord(BagOfWords *bag);
+
+char getLowercase(char letter);
 
 // transform
 

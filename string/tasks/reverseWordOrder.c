@@ -7,7 +7,7 @@ char *reverseWordOrder(char *beginString) {
     char *endRead = copy(beginString,
                          getEndOfString(beginString) + 1,
                          buffer) - 2;
-    WordDescriptor word;
+    Word word;
 
     while (getWordReverse(endRead,
                           rend,

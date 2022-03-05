@@ -114,7 +114,7 @@ char *getEndOfString(char *s) {
     return s + strlen(s);
 }
 
-int getWord(char *beginSearch, WordDescriptor *word) {
+int getWord(char *beginSearch, Word *word) {
     word->begin = findNonSpace(beginSearch);
     word->end = findSpace(word->begin);
 
@@ -124,7 +124,7 @@ int getWord(char *beginSearch, WordDescriptor *word) {
     return 1;
 }
 
-int getWordReverse(char *rbegin, char *rend, WordDescriptor *word) {
+int getWordReverse(char *rbegin, char *rend, Word *word) {
     char *endWord = findNonSpaceReverse(rbegin, rend);
     word->end = endWord + 1;
     if (*endWord == '\0')
@@ -144,12 +144,12 @@ void reverseOrder(char *beginSource, char *endSource) {
          beginSource);
 }
 
-int getWordLen(WordDescriptor word) {
+int getWordLen(Word word) {
     return (int) (word.end - word.begin);
 }
 
-int areWordsEqual(WordDescriptor w1,
-                  WordDescriptor w2) {
+int areWordsEqual(Word w1,
+                  Word w2) {
     for (; getWordLen(w1) != 0 &&
            getWordLen(w2) != 0 &&
            *w1.begin == *w2.begin;
@@ -169,8 +169,8 @@ int areWordsEqual(WordDescriptor w1,
 
 void getBagOfWords(BagOfWords *bag, char *beginString) {
     char *beginSearch = beginString;
-    WordDescriptor word;
-    WordDescriptor *wordInBag = bag->words;
+    Word word;
+    Word *wordInBag = bag->words;
     bag->size = 0;
 
     while (getWord(beginSearch, &word)) {
@@ -180,7 +180,7 @@ void getBagOfWords(BagOfWords *bag, char *beginString) {
     }
 }
 
-WordDescriptor *getEndWord(BagOfWords *bag) {
+Word *getEndWord(BagOfWords *bag) {
     return bag->words + bag->size - 1;
 }
 
@@ -188,7 +188,26 @@ BagOfWords *getBagOfWordsBuffer() {
     return &bagOfWordsBuffer;
 }
 
-void outputWord(WordDescriptor word) {
+void outputWord(Word word) {
     for (; word.begin < word.end; word.begin++)
         printf("%c", *word.begin);
+}
+
+bool isLetterInWord(char letter, Word word) {
+    letter = getLowercase(letter);
+
+    for (char *readPtr = word.begin;
+         readPtr < word.end;
+         readPtr++)
+        if (letter ==
+            getLowercase(*readPtr))
+            return true;
+
+    return false;
+}
+
+char getLowercase(char letter) {
+    if (isupper(letter))
+        letter += 'a' - 'A';
+    return letter;
 }

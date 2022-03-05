@@ -3,9 +3,9 @@
 void outputWordForReversOrdered(char *beginString) {
     BagOfWords *bag = getBagOfWordsBuffer();
     getBagOfWords(bag, beginString);
-    WordDescriptor *firstWord = bag->words;
+    Word *firstWord = bag->words;
 
-    for (WordDescriptor *current = getEndWord(bag);
+    for (Word *current = getEndWord(bag);
          firstWord <= current;
          current--) {
         outputWord(*current);

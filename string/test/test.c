@@ -256,34 +256,35 @@ void test_tasks() {
     test_getCountPalindromes();
     test_mergeStrings();
     test_reverseWordOrder();
+    testAll_getWordBeforeFirstWordWithA();
 }
 
 void test_areWordsEqual() { // TODO
     char sours[] = "123456789";
 
     assert(0 == areWordsEqual(
-            (WordDescriptor) {sours, sours + 9},
-            (WordDescriptor) {sours, sours + 9}
+            (Word) {sours, sours + 9},
+            (Word) {sours, sours + 9}
     ));
 
     assert(1 == areWordsEqual(
-            (WordDescriptor) {sours + 1, sours + 9},
-            (WordDescriptor) {sours, sours + 9}
+            (Word) {sours + 1, sours + 9},
+            (Word) {sours, sours + 9}
     ));
 
     assert(-1 == areWordsEqual(
-            (WordDescriptor) {sours, sours + 9},
-            (WordDescriptor) {sours + 1, sours + 9}
+            (Word) {sours, sours + 9},
+            (Word) {sours + 1, sours + 9}
     ));
 
     assert(-'6' == areWordsEqual(
-            (WordDescriptor) {sours, sours + 5},
-            (WordDescriptor) {sours, sours + 9}
+            (Word) {sours, sours + 5},
+            (Word) {sours, sours + 9}
     ));
 
     assert('6' == areWordsEqual(
-            (WordDescriptor) {sours, sours + 6},
-            (WordDescriptor) {sours, sours + 5}
+            (Word) {sours, sours + 6},
+            (Word) {sours, sours + 5}
     ));
 }
 
@@ -296,7 +297,7 @@ void test_getBagOfWords() {
 
     assert(getBagOfWordsBuffer()->size == 5);
 
-    WordDescriptor *word = getBagOfWordsBuffer()->words;
+    Word *word = getBagOfWordsBuffer()->words;
     assert(word->begin == sours + 1 &&
            word->end == sours + 2);
     word++;
@@ -329,7 +330,7 @@ void test_getEndWord() {
                   getEndWord(bag)->begin);
 }
 
-void test_word_WordDescriptor() {
+void test_word_Word() {
     test_areWordsEqual();
     test_getBagOfWords();
     test_getEndWord();
@@ -341,7 +342,7 @@ void test() {
     test_allCopy();
     test_transform();
     test_tasks();
-    test_word_WordDescriptor();
+    test_word_Word();
 }
 
 int *getLincExitCode() {

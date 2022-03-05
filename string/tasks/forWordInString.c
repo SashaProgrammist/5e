@@ -1,8 +1,8 @@
 #include "../test/test.h"
 
-void forWordInString(char *beginString, void (*f)(WordDescriptor)) {
+void forWordInString(char *beginString, void (*f)(Word)) {
     char *beginSearch = beginString;
-    WordDescriptor word;
+    Word word;
 
     while (getWord(beginSearch, &word)) {
         f(word);
@@ -10,7 +10,7 @@ void forWordInString(char *beginString, void (*f)(WordDescriptor)) {
     }
 }
 
-void digitToStart(WordDescriptor word) {
+void digitToStart(Word word) {
     char *endStringBuffer = copy(word.begin, word.end,
                                  getStringBuffer());
     char *recPosition = copyIfReverse(endStringBuffer - 1,
@@ -35,7 +35,7 @@ void test_digitToStartTransform_manyWord() {
     ASSERT_STRING ("34765GUJwfjM \n 98878uAWZdf 7946UGlwiVWvo", s);
 }
 
-void wordReverse(WordDescriptor word) {
+void wordReverse(Word word) {
     reverseOrder(word.begin, word.end);
 }
 
@@ -55,10 +55,10 @@ void test_reverseAllWordInString_manyWord() {
     ASSERT_STRING ("MjfwJ34765UG \n fdZW98878Au ovWViw79lG46U", s);
 }
 
-void reversForWordInString(char *beginString, void (*f)(WordDescriptor)) {
+void reversForWordInString(char *beginString, void (*f)(Word)) {
     char *beginSearch = getEndOfString(beginString) - 1;
     char *endSearch = beginString - 1;
-    WordDescriptor word;
+    Word word;
 
     while (getWordReverse(beginSearch, endSearch, &word)) {
         f(word);
@@ -66,7 +66,7 @@ void reversForWordInString(char *beginString, void (*f)(WordDescriptor)) {
     }
 }
 
-void increase(WordDescriptor word){
+void increase(Word word){
     static char currentIncrease = 0;
     *word.begin += currentIncrease;
     currentIncrease++;

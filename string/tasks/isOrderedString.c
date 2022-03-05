@@ -1,7 +1,7 @@
 #include "../test/test.h"
 
 int isOrderedString(char *beginString) {
-    WordDescriptor previousWord, currentWord;
+    Word previousWord, currentWord;
 
     getWord(beginString, &previousWord);
     beginString = previousWord.end;

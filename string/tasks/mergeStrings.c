@@ -3,7 +3,7 @@
 char *mergeStrings(char *beginString1,
                   char *beginString2,
                   char *beginDestination) {
-    WordDescriptor word1, word2;
+    Word word1, word2;
     bool isW1Found, isW2Found;
     bool isFromFirst = true;
     char *beginSearch1 = beginString1;

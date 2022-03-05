@@ -39,4 +39,6 @@ void test_mergeStrings();
 
 void test_reverseWordOrder();
 
+void testAll_getWordBeforeFirstWordWithA();
+
 #endif //PROJECT_TEST_H

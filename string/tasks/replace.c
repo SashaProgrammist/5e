@@ -3,8 +3,8 @@
 void replace(char *source, char *w1, char *w2) {
     size_t w1Size = strlen(w1);
     size_t w2Size = strlen(w2);
-    WordDescriptor word1 = {w1, w1 + w1Size};
-    WordDescriptor word2 = {w2, w2 + w2Size};
+    Word word1 = {w1, w1 + w1Size};
+    Word word2 = {w2, w2 + w2Size};
 
     char *readPtr, *recPtr;
     if (w1Size >= w2Size) {
@@ -27,7 +27,7 @@ void replace(char *source, char *w1, char *w2) {
             readPtr = endSource = findNonSpace(readPtr);
         } else {
             char *endWord = findSpace(readPtr);
-            WordDescriptor currentWord = (WordDescriptor){
+            Word currentWord = (Word){
                 readPtr, endWord
             };
 
