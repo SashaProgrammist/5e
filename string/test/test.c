@@ -255,6 +255,7 @@ void test_tasks() {
     test_isOrderedString();
     test_getCountPalindromes();
     test_mergeStrings();
+    test_reverseWordOrder();
 }
 
 void test_areWordsEqual() { // TODO

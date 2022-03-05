@@ -1,7 +1,5 @@
 #include "../test/test.h"
 
-#define COPY(des, word) des = copy(word.begin, word.end, des)
-
 char *mergeStrings(char *beginString1,
                   char *beginString2,
                   char *beginDestination) {
@@ -80,9 +78,17 @@ void test_mergeStrings_manyWord() {
     ASSERT_STRING("1 2 3 4 5 6 7 8 9", getStringBuffer());
 }
 
+void test_mergeStrings_result() {
+    char *result = mergeStrings("1   3 5  7   9",
+                                "2   4   6 8 ",
+                                getStringBuffer());
+    assert(result == getStringBuffer() + 17);
+}
+
 void test_mergeStrings() {
     test_mergeStrings_null();
     test_mergeStrings_oneWord();
     test_mergeStrings_twoWord();
     test_mergeStrings_manyWord();
+    test_mergeStrings_result();
 }

@@ -9,6 +9,7 @@
 #define MAX_STRING_SIZE 100
 #define MAX_N_WORDS_IN_STRING 100
 #define MAX_WORD_SIZE 20
+#define COPY(des, word) des = copy(word.begin, word.end, des)
 
 typedef struct WordDescriptor {
     char *begin; // позиция начала слова

@@ -37,4 +37,6 @@ void test_getCountPalindromes();
 
 void test_mergeStrings();
 
+void test_reverseWordOrder();
+
 #endif //PROJECT_TEST_H
