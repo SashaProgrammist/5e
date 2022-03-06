@@ -127,10 +127,10 @@ int getWord(char *beginSearch, Word *word) {
 int getWordReverse(char *rbegin, char *rend, Word *word) {
     char *endWord = findNonSpaceReverse(rbegin, rend);
     word->end = endWord + 1;
-    if (*endWord == '\0')
-        return 0;
-
     word->begin = findSpaceReverse(endWord, rend) + 1;
+
+    if (endWord == rend)
+        return 0;
 
     return 1;
 }
@@ -210,4 +210,25 @@ char getLowercase(char letter) {
     if (isupper(letter))
         letter += 'a' - 'A';
     return letter;
+}
+
+bool wordInBag(Word word, BagOfWords *bag) {
+    Word *end = getEndWord(bag) + 1;
+
+    for (Word *current = bag->words;
+         current < end;
+         current++)
+        if (0 == areWordsEqual(*current,
+                               word))
+            return true;
+
+
+    return false;
+}
+
+void wordToString(Word word,
+                  char *destination) {
+    *copy(word.begin,
+          word.end,
+          destination) = '\0';
 }

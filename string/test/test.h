@@ -41,4 +41,6 @@ void test_reverseWordOrder();
 
 void testAll_getWordBeforeFirstWordWithA();
 
+void test_lastWordString1ThatInString2();
+
 #endif //PROJECT_TEST_H

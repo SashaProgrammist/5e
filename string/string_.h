@@ -32,6 +32,10 @@ size_t strlen(const char *begin);
 
 bool isLetterInWord(char letter, Word word);
 
+bool wordInBag(Word word, BagOfWords *bag);
+
+void wordToString(Word word, char *destination);
+
 // find
 
 char *find(const char *begin, const char *end, int ch);

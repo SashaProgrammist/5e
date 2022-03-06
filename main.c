@@ -3,7 +3,5 @@
 int main() {
     test();
 
-    printf("%d %d", 'a', 'A');
-
     return *getLincExitCode();
 }

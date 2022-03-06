@@ -1,8 +1,8 @@
 #include "../test/test.h"
 
 char *mergeStrings(char *beginString1,
-                  char *beginString2,
-                  char *beginDestination) {
+                   char *beginString2,
+                   char *beginDestination) {
     Word word1, word2;
     bool isW1Found, isW2Found;
     bool isFromFirst = true;

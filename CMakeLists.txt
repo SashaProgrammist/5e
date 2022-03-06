@@ -18,7 +18,10 @@ add_library(str string/string_.h string/string_.c
         string/tasks/isOrderedString.c
         string/tasks/outputWordForReversOrdered.c
         string/tasks/getCountPalindromes.c
-        string/tasks/mergeStrings.c string/tasks/reverseWordOrder.c string/tasks/getWordBeforeFirstWordWithA.c)
+        string/tasks/mergeStrings.c
+        string/tasks/reverseWordOrder.c
+        string/tasks/getWordBeforeFirstWordWithA.c
+        string/tasks/lastWordString1ThatInString2.c)
 
 # описываем, что для запуска project потребуется сборка tasks
 target_link_libraries(project str)

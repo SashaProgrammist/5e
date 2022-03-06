@@ -257,6 +257,7 @@ void test_tasks() {
     test_mergeStrings();
     test_reverseWordOrder();
     testAll_getWordBeforeFirstWordWithA();
+    test_lastWordString1ThatInString2();
 }
 
 void test_areWordsEqual() { // TODO
