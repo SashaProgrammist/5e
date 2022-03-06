@@ -6,48 +6,7 @@ void replace(char *source, char *w1, char *w2) {
     Word word1 = {w1, w1 + w1Size};
     Word word2 = {w2, w2 + w2Size};
 
-    char *readPtr, *recPtr;
-    if (w1Size >= w2Size) {
-        readPtr = source;
-        recPtr = source;
-    } else {
-        copy(source,
-             getEndOfString(source) + 1,
-             getStringBuffer());
-        readPtr = getStringBuffer();
-        recPtr = source;
-    }
-
-    while (*readPtr != '\0') {
-        char *beginSource;
-        char *endSource;
-
-        if (isspace(*readPtr)) {
-            beginSource = readPtr;
-            readPtr = endSource = findNonSpace(readPtr);
-        } else {
-            char *endWord = findSpace(readPtr);
-            Word currentWord = (Word){
-                readPtr, endWord
-            };
-
-            if (areWordsEqual(currentWord, word1)) {
-                beginSource = readPtr;
-                endSource = endWord;
-            } else {
-                beginSource = word2.begin;
-                endSource = word2.end;
-            }
-
-            readPtr = endWord;
-        }
-
-        recPtr = copy(beginSource,
-                      endSource,
-                      recPtr);
-    }
-
-    *recPtr = '\0';
+    replaceWord(source, word1, word2);
 }
 
 void test_replace_null() {

@@ -346,3 +346,54 @@ void replaceWithMultipleChar(Word *word) {
 bool isAdjacentEqualLetters(char *ch) {
     return ch[0] != ch[1];
 }
+
+char *replaceWord(char *source,
+                  Word word1,
+                  Word word2) {
+    size_t w1Size = word1.end - word1.begin;
+    size_t w2Size = word2.end - word2.begin;
+
+    char *readPtr, *recPtr;
+    if (w1Size >= w2Size) {
+        readPtr = source;
+        recPtr = source;
+    } else {
+        copy(source,
+             getEndOfString(source) + 1,
+             getStringBuffer());
+        readPtr = getStringBuffer();
+        recPtr = source;
+    }
+
+    while (*readPtr != '\0') {
+        char *beginSource;
+        char *endSource;
+
+        if (isspace(*readPtr)) {
+            beginSource = readPtr;
+            readPtr = endSource = findNonSpace(readPtr);
+        } else {
+            char *endWord = findSpace(readPtr);
+            Word currentWord = (Word) {
+                    readPtr, endWord
+            };
+
+            if (areWordsEqual(currentWord, word1)) {
+                beginSource = readPtr;
+                endSource = endWord;
+            } else {
+                beginSource = word2.begin;
+                endSource = word2.end;
+            }
+
+            readPtr = endWord;
+        }
+
+        recPtr = copy(beginSource,
+                      endSource,
+                      recPtr);
+    }
+
+    *recPtr = '\0';
+    return recPtr;
+}

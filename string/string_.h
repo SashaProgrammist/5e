@@ -119,4 +119,6 @@ void sortWord(Word *word);
 
 void replaceWithMultipleChar(Word *word);
 
+char * replaceWord(char *source, Word word1, Word word2);
+
 #endif //INC_5_STRING__H

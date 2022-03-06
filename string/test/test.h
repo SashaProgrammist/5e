@@ -47,4 +47,6 @@ void test_isUniqueWordInString();
 
 void test_isWordIyStringMadeUpOfUniqueChar();
 
+void test_getStringOfWordsOtherThanLast();
+
 #endif //PROJECT_TEST_H

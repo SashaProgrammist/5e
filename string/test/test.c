@@ -9,7 +9,7 @@ void assertString(const char *expected, char *got,
         fprintf(stderr, "File %s\n", fileName);
         fprintf(stderr, "%s - failed on line %d\n", funcName, line);
         fprintf(stderr, "Expected: \"%s\"\n", expected);
-        fprintf(stderr, "Got: \"%s\"\n\n", got);
+        fprintf(stderr, "Got:      \"%s\"\n\n", got);
         (*getLincExitCode())++;
     }
 }
@@ -260,6 +260,7 @@ void test_tasks() {
     test_lastWordString1ThatInString2();
     test_isUniqueWordInString();
     test_isWordIyStringMadeUpOfUniqueChar();
+    test_getStringOfWordsOtherThanLast();
 }
 
 void test_areWordsEqual() { // TODO
