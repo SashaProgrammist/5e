@@ -23,7 +23,11 @@ add_library(str
         string/tasks/reverseWordOrder.c
         string/tasks/getWordBeforeFirstWordWithA.c
         string/tasks/lastWordString1ThatInString2.c
-        string/tasks/isUniqueWordInString.c string/tasks/isWordIyStringMadeUpOfUniqueChar.c string/tasks/getStringOfWordsOtherThanLast.c string/tasks/getWordPrecedingFirstOccurrenceOfWInString1.c)
+        string/tasks/isUniqueWordInString.c
+        string/tasks/isWordIyStringMadeUpOfUniqueChar.c
+        string/tasks/getStringOfWordsOtherThanLast.c
+        string/tasks/getWordPrecedingFirstOccurrenceOfWInString1.c
+        string/tasks/removingWordsFromString.c)
 
 # описываем, что для запуска project потребуется сборка tasks
 target_link_libraries(project str)

@@ -262,6 +262,7 @@ void test_tasks() {
     test_isWordIyStringMadeUpOfUniqueChar();
     test_getStringOfWordsOtherThanLast();
     test_getWordPrecedingFirstOccurrenceOfWInString1();
+    test_removingPalindrome();
 }
 
 void test_areWordsEqual() { // TODO

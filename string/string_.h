@@ -9,7 +9,7 @@
 #define MAX_STRING_SIZE 100
 #define MAX_N_WORDS_IN_STRING 100
 #define MAX_WORD_SIZE 20
-#define COPY(des, word) des = copy(word.begin, word.end, des)
+#define COPY(des, word) des = copy((word).begin, (word).end, des)
 
 typedef struct Word {
     char *begin; // позиция начала слова
@@ -49,6 +49,8 @@ bool isUniqueWordInString(char *beginString);
 bool isWordIyStringMadeUpOfUniqueChar();
 
 bool isAdjacentEqualLetters(char *ch);
+
+bool isPalindrome(Word word);
 
 // find
 
@@ -119,6 +121,10 @@ void sortWord(Word *word);
 
 void replaceWithMultipleChar(Word *word);
 
-char * replaceWord(char *source, Word word1, Word word2);
+char *replaceWord(char *source, Word word1, Word word2);
+
+void deleteIf(BagOfWords *bag, bool (*f)(Word));
+
+void removingIf(char *beginString, bool (*f)(Word));
 
 #endif //INC_5_STRING__H

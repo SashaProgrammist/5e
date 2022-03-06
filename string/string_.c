@@ -397,3 +397,30 @@ char *replaceWord(char *source,
     *recPtr = '\0';
     return recPtr;
 }
+
+void deleteIf(BagOfWords *bag, bool (*f)(Word)) {
+    Word *wordRead = bag->words;
+    Word *endWord = getEndWord(bag) + 1;
+
+    while (wordRead < endWord &&
+           f(*wordRead))
+        wordRead++;
+
+    Word *wordWrite = wordRead++;
+
+    while (wordRead < endWord){
+        if (f(*wordRead))
+            *(wordWrite++) = *wordRead;
+
+        wordRead++;
+    }
+
+    bag->size -= endWord - wordWrite;
+}
+
+void removingIf(char *beginString, bool (*f)(Word)){
+    BagOfWords *bag = getBagOfWordsBuffer();
+    getBagOfWords(bag, beginString);
+    deleteIf(bag, f);
+    bagToString(bag,beginString);
+}

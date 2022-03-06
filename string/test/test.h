@@ -51,4 +51,6 @@ void test_getStringOfWordsOtherThanLast();
 
 void test_getWordPrecedingFirstOccurrenceOfWInString1();
 
+void test_removingPalindrome();
+
 #endif //PROJECT_TEST_H
