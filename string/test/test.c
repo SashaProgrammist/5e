@@ -182,7 +182,7 @@ void test_copyTf() {
     ASSERT_STRING(stResult, stDestination);
 }
 
-int deleteMultiSpace(char *ch) {
+bool deleteMultiSpace(char *ch) {
     if (!isspace(*ch)) return 1;
     return !isspace(ch[1]);
 }
@@ -259,6 +259,7 @@ void test_tasks() {
     testAll_getWordBeforeFirstWordWithA();
     test_lastWordString1ThatInString2();
     test_isUniqueWordInString();
+    test_isWordIyStringMadeUpOfUniqueChar();
 }
 
 void test_areWordsEqual() { // TODO

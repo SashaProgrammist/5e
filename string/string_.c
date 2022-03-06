@@ -3,7 +3,7 @@
 char stringBuffer[MAX_STRING_SIZE + 1];
 
 BagOfWords bagOfWordsBuffer = {
-        (Word [MAX_N_WORDS_IN_STRING]) {},
+        (Word[MAX_N_WORDS_IN_STRING]) {},
         0
 };
 
@@ -78,7 +78,7 @@ char *copyReverse(char *rbeginSource, const char *rendSource, char *beginDestina
 }
 
 char *copyIfExtended(char *beginSource, const char *endSource,
-                     char *beginDestination, int (*f)(char *)) {
+                     char *beginDestination, bool (*f)(char *)) {
     for (; beginSource != endSource; beginSource++)
         if (f(beginSource))
             *(beginDestination++) = *beginSource;
@@ -113,8 +113,8 @@ char *copyIfReverseExtended(char *rbeginSource, const char *rendSource,
     return beginDestination;
 }
 
-char *getEndOfString(char *s) {
-    return s + strlen(s);
+char *getEndOfString(char *beginString) {
+    return beginString + strlen(beginString);
 }
 
 int getWord(char *beginSearch, Word *word) {
@@ -300,4 +300,49 @@ bool isWordInSortBag(Word word, BagOfWords *bag) {
     }
 
     return false;
+}
+
+void foreachBag(BagOfWords *bag, void (*f)(Word *)) {
+    for (Word *current = bag->words,
+                 *end = getEndWord(bag);
+         current <= end;
+         current++)
+        f(current);
+}
+
+void sortWord(Word *word) {
+    qsort(word->begin,
+          word->end - word->begin,
+          sizeof(char),
+          compareChar);
+}
+
+int compareChar(const void *a, const void *b) {
+    char arg1 = *(const char *) a;
+    char arg2 = *(const char *) b;
+
+    if (arg1 < arg2) return -1;
+    if (arg1 > arg2) return 1;
+    return 0;
+}
+
+void replaceWithMultipleChar(Word *word) {
+    sortWord(word);
+    char *destination = copyIfExtended(
+            word->begin,
+            word->end,
+            word->begin,
+            isAdjacentEqualLetters);
+
+
+    for (char *recordPtr = destination;
+         recordPtr < word->end;
+         recordPtr++)
+        *recordPtr = ' ';
+
+    word->end = destination;
+}
+
+bool isAdjacentEqualLetters(char *ch) {
+    return ch[0] != ch[1];
 }

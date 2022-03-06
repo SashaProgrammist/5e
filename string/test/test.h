@@ -45,4 +45,6 @@ void test_lastWordString1ThatInString2();
 
 void test_isUniqueWordInString();
 
+void test_isWordIyStringMadeUpOfUniqueChar();
+
 #endif //PROJECT_TEST_H

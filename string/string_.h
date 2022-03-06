@@ -29,17 +29,26 @@ void outputWord(Word word);
 
 size_t strlen(const char *begin);
 
-bool isLetterInWord(char letter, Word word);
-
-bool isWordInBag(Word word, BagOfWords *bag);
-
-bool isWordInSortBag(Word word, BagOfWords *bag);
 
 char *wordToString(Word word, char *destination);
 
 char *bagToString(BagOfWords *bag, char *destination);
 
 void sortBagOfWords(BagOfWords *bag);
+
+// bool
+
+bool isLetterInWord(char letter, Word word);
+
+bool isWordInBag(Word word, BagOfWords *bag);
+
+bool isWordInSortBag(Word word, BagOfWords *bag);
+
+bool isUniqueWordInString(char *beginString);
+
+bool isWordIyStringMadeUpOfUniqueChar();
+
+bool isAdjacentEqualLetters(char *ch);
 
 // find
 
@@ -61,6 +70,8 @@ int areWordsEqual(Word w1, Word w2);
 
 int compareWords(const void *a, const void *b);
 
+int compareChar(const void *a, const void *b);
+
 // copy
 
 char *copy(const char *beginSource, const char *endSource,
@@ -73,7 +84,7 @@ char *copyIf(char *beginSource, const char *endSource,
              char *beginDestination, int (*f)(int));
 
 char *copyIfExtended(char *beginSource, const char *endSource,
-                     char *beginDestination, int (*f)(char *));
+                     char *beginDestination, bool (*f)(char *));
 
 char *copyIfReverse(char *rbeginSource, const char *rendSource,
                     char *beginDestination, int (*f)(int));
@@ -83,7 +94,7 @@ char *copyIfReverseExtended(char *rbeginSource, const char *rendSource,
 
 // get
 
-char *getEndOfString(char *s);
+char *getEndOfString(char *beginString);
 
 int getWord(char *beginSearch, Word *word);
 
@@ -100,5 +111,12 @@ char getLowercase(char letter);
 // transform
 
 void reverseOrder(char *beginSource, char *endSource);
+
+void foreachBag(BagOfWords *bag,
+                void (*f)(Word *));
+
+void sortWord(Word *word);
+
+void replaceWithMultipleChar(Word *word);
 
 #endif //INC_5_STRING__H

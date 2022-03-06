@@ -1,15 +1,12 @@
 #include "../test/test.h"
 
-int isAdjacentEqualLetters(const char *ch) {
-    return ch[0] != ch[1];
-}
-
 void removeAdjacentEqualLetters(char *s) {
     char *endSource = getEndOfString(s);
-    char *destination = copyIfExtended(s,
-                                       endSource,
-                                       s,
-                                       (int (*)(char *)) isAdjacentEqualLetters);
+    char *destination = copyIfExtended(
+            s,
+            endSource,
+            s,
+            isAdjacentEqualLetters);
     *destination = '\0';
 }
 
