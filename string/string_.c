@@ -2,7 +2,10 @@
 
 char stringBuffer[MAX_STRING_SIZE + 1];
 
-BagOfWords bagOfWordsBuffer;
+BagOfWords bagOfWordsBuffer = {
+        (Word [MAX_N_WORDS_IN_STRING]) {},
+        0
+};
 
 //char *_stringBuffer = __stringBuffer;
 char *getStringBuffer() {
@@ -212,7 +215,7 @@ char getLowercase(char letter) {
     return letter;
 }
 
-bool wordInBag(Word word, BagOfWords *bag) {
+bool isWordInBag(Word word, BagOfWords *bag) {
     Word *end = getEndWord(bag) + 1;
 
     for (Word *current = bag->words;
@@ -226,9 +229,75 @@ bool wordInBag(Word word, BagOfWords *bag) {
     return false;
 }
 
-void wordToString(Word word,
-                  char *destination) {
-    *copy(word.begin,
-          word.end,
-          destination) = '\0';
+char *wordToString(Word word,
+                   char *destination) {
+    char *result = copy(word.begin,
+                        word.end,
+                        destination);
+    *result = '\0';
+    return result;
+}
+
+
+void sortBagOfWords(BagOfWords *bag) {
+    qsort(bag->words,
+          bag->size,
+          sizeof(Word),
+          compareWords);
+}
+
+int compareWords(const void *a, const void *b) {
+    Word arg1 = *(const Word *) a;
+    Word arg2 = *(const Word *) b;
+
+    int resultCmp = areWordsEqual(arg1, arg2);
+    if (resultCmp < 0) return -1;
+    if (resultCmp > 0) return 1;
+    return 0;
+}
+
+char *bagToString(BagOfWords *bag, char *destination) {
+    char *recordPtr = destination;
+
+    for (Word *current = bag->words,
+                 *end = getEndWord(bag) + 1;
+         current < end;
+         current++) {
+        COPY(recordPtr, (*current));
+        *recordPtr = ' ';
+        recordPtr++;
+    }
+
+    if (recordPtr != destination)
+        recordPtr--;
+
+    *recordPtr = '\0';
+
+    return recordPtr;
+}
+
+bool isWordInSortBag(Word word, BagOfWords *bag) {
+    Word *end = getEndWord(bag);
+    Word *begin = bag->words;
+
+    while (begin <= end) {
+        Word *middle = begin + (end - begin) / 2;
+
+        int cmpRes = compareWords(&word, middle);
+
+        switch (cmpRes) {
+            case 1:
+                begin = middle + 1;
+                break;
+            case 0:
+                return true;
+            case -1:
+                end = middle - 1;
+                break;
+            default:
+                exit(1);
+        }
+    }
+
+    return false;
 }

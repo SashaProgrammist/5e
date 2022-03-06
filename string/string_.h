@@ -15,16 +15,15 @@ typedef struct Word {
     char *begin; // позиция начала слова
     char *end; //   позиция первого символа, после последнего символа слова
 } Word;
+
 char *getStringBuffer();
 
 typedef struct BagOfWords {
-    Word words[MAX_N_WORDS_IN_STRING];
+    Word *words;
     size_t size;
 } BagOfWords;
-BagOfWords *getBagOfWordsBuffer();
 
-int areWordsEqual(Word w1,
-                  Word w2);
+BagOfWords *getBagOfWordsBuffer();
 
 void outputWord(Word word);
 
@@ -32,9 +31,15 @@ size_t strlen(const char *begin);
 
 bool isLetterInWord(char letter, Word word);
 
-bool wordInBag(Word word, BagOfWords *bag);
+bool isWordInBag(Word word, BagOfWords *bag);
 
-void wordToString(Word word, char *destination);
+bool isWordInSortBag(Word word, BagOfWords *bag);
+
+char *wordToString(Word word, char *destination);
+
+char *bagToString(BagOfWords *bag, char *destination);
+
+void sortBagOfWords(BagOfWords *bag);
 
 // find
 
@@ -51,6 +56,10 @@ char *findSpaceReverse(char *rbegin, const char *rend);
 //cmp
 
 int strcmp_(const char *lhs, const char *rhs);
+
+int areWordsEqual(Word w1, Word w2);
+
+int compareWords(const void *a, const void *b);
 
 // copy
 

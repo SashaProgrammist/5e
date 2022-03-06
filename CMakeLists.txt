@@ -8,7 +8,8 @@ set(CMAKE_C_STANDARD 11)
 add_executable(project main.c)
 
 # создаём библиотеку
-add_library(str string/string_.h string/string_.c
+add_library(str
+        string/string_.h string/string_.c
         string/test/test.h string/test/test.c
         string/tasks/removeNonLetters.c
         string/tasks/removeAdjacentEqualLetters.c
@@ -21,7 +22,8 @@ add_library(str string/string_.h string/string_.c
         string/tasks/mergeStrings.c
         string/tasks/reverseWordOrder.c
         string/tasks/getWordBeforeFirstWordWithA.c
-        string/tasks/lastWordString1ThatInString2.c)
+        string/tasks/lastWordString1ThatInString2.c
+        string/tasks/isUniqueWordInString.c)
 
 # описываем, что для запуска project потребуется сборка tasks
 target_link_libraries(project str)

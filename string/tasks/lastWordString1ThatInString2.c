@@ -5,12 +5,13 @@ bool lastWordString1ThatInString2(char *beginString1,
                                   Word *word) {
     BagOfWords *bag = getBagOfWordsBuffer();
     getBagOfWords(bag, beginString2);
+    sortBagOfWords(bag);
 
     char *rbegin = getEndOfString(beginString1) - 1;
     char *rend = beginString1 - 1;
 
     while (getWordReverse(rbegin, rend, word)){
-        if (wordInBag(*word, bag))
+        if (isWordInSortBag(*word, bag))
             return true;
 
         rbegin = word->begin - 1;

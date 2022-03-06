@@ -43,4 +43,6 @@ void testAll_getWordBeforeFirstWordWithA();
 
 void test_lastWordString1ThatInString2();
 
+void test_isUniqueWordInString();
+
 #endif //PROJECT_TEST_H
