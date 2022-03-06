@@ -3,14 +3,14 @@
 char *getStringOfWordsOtherThanLast(char *beginString, char *result) {
     size_t size = strlen(beginString);
     char *endString = beginString + size;
+    copy(beginString,
+         endString + 1,
+         result);
     Word word1;
     getWordReverse(endString - 1,
                    beginString - 1,
                    &word1);
     Word word2 = {NULL, NULL};
-    copy(beginString,
-         endString + 1,
-         result);
 
     return replaceWord(result, word1, word2);
 }

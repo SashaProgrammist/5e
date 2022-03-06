@@ -49,4 +49,6 @@ void test_isWordIyStringMadeUpOfUniqueChar();
 
 void test_getStringOfWordsOtherThanLast();
 
+void test_getWordPrecedingFirstOccurrenceOfWInString1();
+
 #endif //PROJECT_TEST_H

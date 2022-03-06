@@ -261,6 +261,7 @@ void test_tasks() {
     test_isUniqueWordInString();
     test_isWordIyStringMadeUpOfUniqueChar();
     test_getStringOfWordsOtherThanLast();
+    test_getWordPrecedingFirstOccurrenceOfWInString1();
 }
 
 void test_areWordsEqual() { // TODO
