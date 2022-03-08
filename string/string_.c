@@ -408,7 +408,7 @@ void deleteIf(BagOfWords *bag, bool (*f)(Word)) {
 
     Word *wordWrite = wordRead++;
 
-    while (wordRead < endWord){
+    while (wordRead < endWord) {
         if (f(*wordRead))
             *(wordWrite++) = *wordRead;
 
@@ -418,9 +418,47 @@ void deleteIf(BagOfWords *bag, bool (*f)(Word)) {
     bag->size -= endWord - wordWrite;
 }
 
-void removingIf(char *beginString, bool (*f)(Word)){
-    BagOfWords *bag = getBagOfWordsBuffer();
-    getBagOfWords(bag, beginString);
-    deleteIf(bag, f);
-    bagToString(bag,beginString);
+void removingIf(char *beginString, bool (*f)(Word)) {
+    Word previous = {beginString, beginString};
+    char *recordPtr = beginString;
+    char *readPtr = beginString;
+
+    while (*previous.end != '\0') {
+        Word current;
+        getWord(readPtr, &current);
+
+        COPY(recordPtr, ((Word)
+                {previous.end,
+                 current.begin}));
+
+        if (f(current))
+            COPY(recordPtr, current);
+
+        previous = current;
+        readPtr = current.end;
+    }
+
+    *recordPtr = '\0';
+}
+
+int getCountWord(char *beginSearch) {
+    bool previous, current;
+    previous = current = false;
+    char *readPtr = beginSearch;
+    int result = 0;
+
+    while (*readPtr != '\0') {
+        current = !isspace(*readPtr);
+
+        if (previous && !current)
+            result++;
+
+        previous = current;
+        readPtr++;
+    }
+
+    if (current)
+        result++;
+
+    return result;
 }

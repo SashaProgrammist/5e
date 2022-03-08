@@ -263,6 +263,7 @@ void test_tasks() {
     test_getStringOfWordsOtherThanLast();
     test_getWordPrecedingFirstOccurrenceOfWInString1();
     test_removingPalindrome();
+    test_padSmallerString();
 }
 
 void test_areWordsEqual() { // TODO

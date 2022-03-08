@@ -23,7 +23,7 @@ void test_removingPalindrome_noRemoving() {
 void test_removingPalindrome_yesRemoving() {
     char s[] = "12 34 565 78 90";
     removingPalindrome(s);
-    ASSERT_STRING("12 34 78 90", s);
+    ASSERT_STRING("12 34  78 90", s);
 }
 
 void test_removingPalindrome() {

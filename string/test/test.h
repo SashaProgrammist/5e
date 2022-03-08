@@ -53,4 +53,6 @@ void test_getWordPrecedingFirstOccurrenceOfWInString1();
 
 void test_removingPalindrome();
 
+void test_padSmallerString();
+
 #endif //PROJECT_TEST_H

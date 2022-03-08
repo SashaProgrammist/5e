@@ -110,6 +110,8 @@ Word *getEndWord(BagOfWords *bag);
 
 char getLowercase(char letter);
 
+int getCountWord(char *beginSearch);
+
 // transform
 
 void reverseOrder(char *beginSource, char *endSource);
