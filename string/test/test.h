@@ -55,4 +55,6 @@ void test_removingPalindrome();
 
 void test_padSmallerString();
 
+void test_isWordInString();
+
 #endif //PROJECT_TEST_H

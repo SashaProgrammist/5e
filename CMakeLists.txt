@@ -28,7 +28,8 @@ add_library(str
         string/tasks/getStringOfWordsOtherThanLast.c
         string/tasks/getWordPrecedingFirstOccurrenceOfWInString1.c
         string/tasks/removingWordsFromString.c
-        string/tasks/padSmallerString.c)
+        string/tasks/padSmallerString.c
+        string/tasks/isWordInString.c)
 
 # описываем, что для запуска project потребуется сборка tasks
 target_link_libraries(project str)
